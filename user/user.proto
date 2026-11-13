@@ -1,1 +1,40 @@
 syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+package user;
+option java_multiple_files = true;
+
+service UserService {
+    rpc CreateUserProfile(CreateUserRequest) returns (UserResponse);
+    rpc GetUserById(UserRequest) returns (UserResponse);
+}
+
+message CreateUserRequest {
+    string first_name = 1;
+    string last_name = 2;
+    string middle_name = 3;
+    string inn = 4;
+    string index = 5;
+    string reg_address = 6;
+    string fact_address = 7;
+    string phone_number = 8;
+    string email = 9;
+    string passport_series = 10;
+    string passport_number = 11;
+}
+
+message UserResponse {
+    string user_id = 1;
+    string first_name = 2;
+    string last_name = 3;
+    string middle_name = 4;
+    string phone_number = 5;
+}
+
+message UserRequest {
+    string user_id = 1;
+}
+
+
