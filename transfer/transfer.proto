@@ -1,0 +1,44 @@
+syntax = "proto3";
+option java_multiple_files = true;
+
+import "google/protobuf/timestamp.proto";
+
+service TransferService {
+  rpc CreateTransfer (CreateTransferRequest) returns (CreateTransferResponse);
+  rpc GetTransferInfo (GetTransferInfoRequest) returns (GetTransferInfoResponse);
+}
+
+message CreateTransferRequest {
+    string from_card_account_id = 1;
+    string to_account_id = 2;
+    int64 amount = 3;
+    TransferType type = 4;
+}
+
+message CreateTransferResponse {
+  string id = 1;
+  TransferStatus status = 2;
+  google.protobuf.Timestamp created_at = 3;
+}
+
+message GetTransferInfoRequest {
+    string id = 1;
+}
+
+message GetTransferInfoResponse {
+    string id = 1;
+    TransferStatus status = 2;
+    google.protobuf.Timestamp created_at = 3;
+    optional google.protobuf.Timestamp completed_at = 4;
+}
+
+enum TransferType {
+    INTERNAL = 0;
+}
+
+enum TransferStatus {
+    PENDING = 0;
+    PROCESSING = 1;
+    COMPLETED = 2;
+    FAILED = 3;
+}
