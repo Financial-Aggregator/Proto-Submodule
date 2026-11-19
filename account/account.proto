@@ -1,0 +1,112 @@
+syntax = "proto3";
+option java_multiple_files = true;
+
+import "google/protobuf/timestamp.proto";
+import "transfer/transfer.proto";
+
+service AccountService {
+    rpc CreateAccount (CreateAccountRequest) returns (CreateAccountResponse);
+    rpc LockAccount (LockAccountRequest) returns (LockAccountResponse);
+    rpc UnlockAccount (UnlockAccountRequest) returns (UnlockAccountResponse);
+    rpc GetAccountInfo (GetAccountInfoRequest) returns (GetAccountInfoResponse);
+    rpc CreateTransactionByTransfer (CreateTransactionByTransferRequest) returns (CreateTransactionByTransferResponse);
+    rpc GetTransactionInfo (GetTransactionInfoRequest) returns (GetTransactionInfoResponse);
+    rpc GetBalanceOfAccount (GetBalanceOfAccountRequest) returns (GetBalanceOfAccountResponse);
+}
+
+message GetBalanceOfAccountRequest {
+    string account_id = 1;
+}
+
+message GetBalanceOfAccountResponse {
+    int64 balance = 1;
+}
+
+message GetTransactionInfoRequest {
+    string id = 1;
+}
+
+message GetTransactionInfoResponse {
+    string id = 1;
+    TransactionType type = 2;
+    TransactionStatus status = 3;
+    google.protobuf.Timestamp created_at = 4;
+}
+
+message CreateTransactionByTransferRequest {
+    string from_account_id = 1;
+    string to_account_id = 2;
+    int64 amount = 3;
+    TransferType transfer_type = 4;
+}
+
+message CreateTransactionByTransferResponse {
+    string id = 1;
+    TransactionStatus status = 2;
+    google.protobuf.Timestamp created_at = 3;
+}
+
+message GetAccountInfoRequest {
+    string id = 1;
+}
+
+message GetAccountInfoResponse {
+    string id = 1;
+    string user_id = 2;
+    string account_number = 3;
+    AccountType type = 4;
+    AccountStatus status = 5;
+    google.protobuf.Timestamp created_at = 6;
+    optional google.protobuf.Timestamp closed_at = 7;
+}
+
+message CreateAccountRequest {
+    string user_id = 1;
+    AccountType type = 2;
+}
+
+message CreateAccountResponse {
+    string id = 1;
+    string account_number = 2;
+    AccountStatus status = 3;
+    google.protobuf.Timestamp created_at = 4;
+}
+
+message LockAccountRequest {
+    string id = 1;
+}
+
+message LockAccountResponse {
+    AccountStatus status = 1;
+}
+
+message UnlockAccountRequest {
+    string id = 1;
+}
+
+message UnlockAccountResponse {
+    AccountStatus status = 1;
+}
+
+enum AccountType {
+    CURRENT = 0;
+    SAVINGS = 1;
+    DEPOSIT = 2;
+}
+
+enum AccountStatus {
+    PENDING = 0;
+    ACTIVE = 1;
+    SUSPENDED = 2;
+    CLOSED = 3;
+}
+
+enum TransactionStatus {
+    PENDING = 0;
+    SUCCESSFULLY = 1;
+    FAILED = 2;
+}
+
+enum TransactionType {
+    TRANSFER = 0;
+}

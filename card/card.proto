@@ -1,1 +1,74 @@
 syntax = "proto3";
+option java_multiple_files = true;
+
+import "google/protobuf/timestamp.proto";
+
+service CardService {
+    rpc CreateCard (CreateCardRequest) returns (CreateCardResponse);
+    rpc GetCardInfo (GetCardInfoRequest) returns (GetCardInfoResponse);
+    rpc LockCard (LockCardRequest) returns (LockCardResponse);
+    rpc UnlockCard (UnlockCardRequest) returns (UnlockCardResponse);
+}
+
+message UnlockCardRequest {
+    string id = 1;
+}
+
+message UnlockCardResponse {
+    CardStatus status = 1;
+}
+
+message LockCardRequest {
+    string id = 1;
+}
+
+message LockCardResponse {
+    CardStatus status = 1;
+}
+
+message CreateCardRequest {
+    string user_id = 1;
+    string account_id = 2;
+    CardType type = 3;
+    PaymentSystem payment_system = 4;
+}
+
+message CreateCardResponse {
+    string id = 1;
+    string number = 2;
+    google.protobuf.Timestamp expire_date = 3;
+    CardStatus status = 4;
+}
+
+message GetCardInfoRequest {
+    string id = 1;
+}
+
+message GetCardInfoResponse {
+    string id = 1;
+    string user_id = 2;
+    string account_id = 3;
+    string number = 4;
+    google.protobuf.Timestamp expire_date = 5;
+    CardStatus status = 6;
+    CardType type = 7;
+    PaymentSystem payment_system = 8;
+}
+
+enum CardType {
+    DEBIT = 0;
+    CREDIT = 1;
+}
+
+enum PaymentSystem {
+    MIR = 0;
+    VISA = 1;
+    MASTERCARD = 2;
+}
+
+enum CardStatus {
+    ACTIVE = 0;
+    SUSPENDED = 1;
+    CLOSED = 2;
+    EXPIRED = 3;
+}
