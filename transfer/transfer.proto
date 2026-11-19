@@ -9,7 +9,7 @@ service TransferService {
 }
 
 message CreateTransferRequest {
-    string from_card_account_id = 1;
+    string from_card_id = 1;
     string to_account_id = 2;
     int64 amount = 3;
     TransferType type = 4;
