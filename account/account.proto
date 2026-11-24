@@ -36,7 +36,7 @@ message GetTransactionInfoResponse {
 
 message CreateTransactionByTransferRequest {
     string from_account_id = 1;
-    string to_account_id = 2;
+    string to_card_id = 2;
     int64 amount = 3;
     TransferType transfer_type = 4;
 }
