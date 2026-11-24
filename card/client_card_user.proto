@@ -5,6 +5,15 @@ option java_package = "ru.bank.cardmicroservice.proto.card.user";
 
 service ClientCardUser {
     rpc IsExistUserById (IsExistUserByIdRequest) returns (IsExistUserByIdResponse);
+    rpc GetUserIdByPhoneNumber (GetUserIdByPhoneNumberRequest) returns (GetUserIdByPhoneNumberResponse);
+}
+
+message GetUserIdByPhoneNumberRequest {
+    string phone_number = 1;
+}
+
+message GetUserIdByPhoneNumberResponse {
+    string user_id = 1;
 }
 
 message IsExistUserByIdRequest {
