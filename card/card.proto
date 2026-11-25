@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 option java_multiple_files = true;
-option java_package = "ru.bank.cardmicroservice.proto.card";
+option java_package = "ru.bank.proto.card";
 
 import "google/protobuf/timestamp.proto";
 
