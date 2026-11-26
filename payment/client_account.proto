@@ -3,7 +3,7 @@ syntax = "proto3";
 option java_multiple_files = true;
 option java_package = "ru.bank.proto.payment.account";
 
-service ClientCardAccountService {
+service ClientPaymentAccountService {
   rpc GetCardHolder (GetCardHolderRequest) returns (GetCardHolderResponse);
 }
 
