@@ -6,6 +6,24 @@ option java_multiple_files = true;
 service UserService {
     rpc CreateUserProfile(CreateUserRequest) returns (UserResponse);
     rpc GetUserById(UserRequest) returns (UserResponse);
+    rpc GetUserIdByPhoneNumber (GetUserIdByPhoneNumberRequest) returns (GetUserIdByPhoneNumberResponse);
+    rpc IsExistUserById (IsExistUserByIdRequest) returns (IsExistUserByIdResponse);
+}
+
+message GetUserIdByPhoneNumberRequest {
+  string phone_number = 1;
+}
+
+message GetUserIdByPhoneNumberResponse {
+  string user_id = 1;
+}
+
+message IsExistUserByIdRequest {
+  string id = 1;
+}
+
+message IsExistUserByIdResponse {
+  bool result = 1;
 }
 
 message CreateUserRequest {

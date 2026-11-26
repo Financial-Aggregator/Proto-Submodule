@@ -13,6 +13,15 @@ service AccountService {
     rpc CreateTransactionByTransfer (CreateTransactionByTransferRequest) returns (CreateTransactionByTransferResponse);
     rpc GetTransactionInfo (GetTransactionInfoRequest) returns (GetTransactionInfoResponse);
     rpc GetBalanceOfAccount (GetBalanceOfAccountRequest) returns (GetBalanceOfAccountResponse);
+    rpc GetCardHolder (GetCardHolderRequest) returns (GetCardHolderResponse);
+}
+
+message GetCardHolderRequest {
+  string account_id = 1;
+}
+
+message GetCardHolderResponse {
+  string user_id = 1;
 }
 
 message GetBalanceOfAccountRequest {
