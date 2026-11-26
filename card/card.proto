@@ -11,6 +11,11 @@ service CardService {
     rpc LockCard (LockCardRequest) returns (LockCardResponse);
     rpc UnlockCard (UnlockCardRequest) returns (UnlockCardResponse);
     rpc GetCardInfoByCardNumber (GetCardInfoByCardNumberRequest) returns (GetCardInfoResponse);
+    rpc GetPrimaryCardInfoByUserId (GetPrimaryCardInfoByUserIdRequest) returns (GetCardInfoResponse);
+}
+
+message GetPrimaryCardInfoByUserIdRequest {
+    string user_id = 1;
 }
 
 message GetCardInfoByCardNumberRequest {
